@@ -42,7 +42,7 @@ for row in csv_reader:
 
     net_change.append(change_in_profit)
 
-    
+
 
 
 
