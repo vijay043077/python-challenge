@@ -1,6 +1,7 @@
 # import os module & csv reader
 import os
 import csv 
+
 # import the system module
 import sys
 
@@ -26,6 +27,8 @@ with open(csv_path) as csv_file:
     profit_decrease = {"Date": first_row[0], "Profit/Losses": 0}
 
     # read each row after header row
+    # count total number of months 
+    # net total amount of "Profit/Losses"
 for row in csv_reader:
     total_months_count = total_months_count + 1
     net_total = net_total + int(row[1])
@@ -42,14 +45,4 @@ for row in csv_reader:
 
     net_change.append(change_in_profit)
 
-
-
-
-
-
-
-
-
-
-
-
+    
