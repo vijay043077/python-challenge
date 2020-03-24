@@ -6,7 +6,7 @@ import csv
 import sys
 
 # set file path
-csv_path = os.path.join("..", "PyBank", "budget_data.csv")
+csv_path = os.path.join("..", "budget_data.csv")
 
 # read CSV file
 with open(csv_path) as csv_file:
@@ -23,8 +23,8 @@ with open(csv_path) as csv_file:
     previous_row = int(first_row[1])
     change_in_profit = 0
     net_change = []
-    profit_increase = {"Date": first_row[0], "Profit/Losses": 0}
-    profit_decrease = {"Date": first_row[0], "Profit/Losses": 0}
+    profit_increase = {"Date": first_row[0], "Profit_Increase": 0}
+    profit_decrease = {"Date": first_row[0], "Profit_Decrease": 0}
 
     # read each row after header row
     # count total number of months 
@@ -38,11 +38,38 @@ for row in csv_reader:
     # change in profit "if" statement
     if len(net_change)> 0 and change_in_profit> max(net_change):
         profit_increase["Date"] = row[0]
-        profit_increase["Profit/Losses"] = change_in_profit
+        profit_increase["Profit_Increase"] = change_in_profit
     elif len(net_change) and change_in_profit< min(net_change):
         profit_decrease["Date"] = row[0]
-        profit_decrease["Profit/Losses"] = change_in_profit
+        profit_decrease["Profit_Decrease"] = change_in_profit
 
     net_change.append(change_in_profit)
+
+# average of net change formula
+average_net_change = sum(net_change)/len(net_change) 
+
+# print out financial summary
+print(f"Total Months: {total_months_count}")
+print(f"Total: ${net_total}")
+print(f"Average Change: ${average_net_change: .2f}")
+print("Greatest Increase in Profits:", profit_increase["Date"], "$", profit_increase["Profit_Increase"])
+print("Greatest Decrease in Profits:", profit_decrease["Date"], "$", profit_decrease["Profit_Decrease"])
+
+# set a variable to print to txt file
+text_file= os.path.join("budget_results.txt")
+
+# open txt file
+sys.stdout= open(text_file, "w")
+
+# print budget results to txt file
+print(f"Total Months: {total_months_count}")
+print(f"Total: ${net_total}")
+print(f"Average Change: ${average_net_change: .2f}")
+print("Greatest Increase in Profits:", profit_increase["Date"], "$", profit_increase["Profit_Increase"])
+print("Greatest Decrease in Profits:", profit_decrease["Date"], "$", profit_decrease["Profit_Decrease"]) 
+
+sys.stdout.close()
+
+
 
     
