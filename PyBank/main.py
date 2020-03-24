@@ -6,7 +6,7 @@ import csv
 import sys
 
 # set file path
-csv_path = os.path.join("..", "budget_data.csv")
+csv_path = os.path.join("..", "PyBank", "budget_data.csv")
 
 # read CSV file
 with open(csv_path) as csv_file:
