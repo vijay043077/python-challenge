@@ -69,6 +69,6 @@ with open(csv_path) as csv_file:
     with open("output.txt","w") as out_text:
         out_text.write(output_text)
     
-
+     
 
 
